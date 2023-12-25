@@ -14,10 +14,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository3;
 
-    public UserResponse createUser(String username, String password)
+    public User createUser(String username, String password)
     {
-        User user=new User(username,password);
-    User savedUser=userRepository3.save(user);
+       // User user=new User(username,password);
+   /* User savedUser=userRepository3.save(user);
+
 
     UserResponse userResponse=new UserResponse();
     userResponse.setFirstName(savedUser.getFirstName());
@@ -25,6 +26,14 @@ public class UserService {
     userResponse.setUsername(savedUser.getUsername());
     userResponse.setMessage("User registered sucessfully!!!");
     return userResponse;
+    */
+        User user = new User();
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setUsername(username);
+        user.setPassword(password);
+
+        return userRepository3.save(user);
     }
 
     public void deleteUser(int userId){
