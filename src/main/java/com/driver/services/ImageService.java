@@ -29,7 +29,7 @@ public class ImageService {
         else {
             Blog blog=optionalBlog.get();
             imageRepository2.save(image);
-            blog.getImages().add(image);
+            blog.getImageList().add(image);
             blogRepository2.save(blog);
             return image;
         }

@@ -17,11 +17,11 @@ public class User
 
     List<Blog> blogs=new ArrayList<>();
 
-    public List<Blog> getBlogs() {
+    public List<Blog> getBlogList() {
         return blogs;
     }
 
-    public void setBlogs(List<Blog> blogs) {
+    public void setBlogList(List<Blog> blogs) {
         this.blogs = blogs;
     }
 

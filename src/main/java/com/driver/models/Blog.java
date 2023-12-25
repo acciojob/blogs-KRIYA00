@@ -15,11 +15,11 @@ public class Blog
     String title;
     String content;
 
-    public List<Image> getImages() {
+    public List<Image> getImageList() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImageList(List<Image> images) {
         this.images = images;
     }
 
