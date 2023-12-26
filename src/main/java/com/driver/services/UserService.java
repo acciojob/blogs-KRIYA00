@@ -1,7 +1,7 @@
 package com.driver.services;
 
 import com.driver.dtoResponse.UserResponse;
-import com.driver.exceptions.UserNotFoundException;
+
 import com.driver.models.*;
 import com.driver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +43,12 @@ public class UserService {
 
     public User updateUser(Integer id, String password)
     {
-        Optional<User> userOptional=userRepository3.findById(id);
-        if(userOptional.isEmpty())
-            throw new UserNotFoundException("User with given id not present !!");
-        else {
-            User user=userOptional.get();
+        User user=userRepository3.findById(id).get();
+
             user.setPassword(password);
             userRepository3.save(user);
             return user ;
-        }
+
 
     }
 }

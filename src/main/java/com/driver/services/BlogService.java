@@ -1,6 +1,6 @@
 package com.driver.services;
 
-import com.driver.exceptions.UserNotFoundException;
+
 import com.driver.models.Blog;
 import com.driver.models.Image;
 import com.driver.models.User;
@@ -28,19 +28,13 @@ public class BlogService {
         Blog blog=new Blog();
         blog.setTitle(title);
         blog.setContent(content);
-       Optional<User> userOptional=userRepository1.findById(userId);
-       if(userOptional.isEmpty())
-        {
-            throw  new UserNotFoundException("User with given userId not found !!");
-        }
-       else {
 
-           User user=userOptional.get();
+           User user=userRepository1.findById(userId).get();
            blog.setUser(user);
            blogRepository1.save(blog);
            user.getBlogList().add(blog);
            userRepository1.save(user);
-       }
+
        return blog;
     }
 

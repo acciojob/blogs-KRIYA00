@@ -1,7 +1,6 @@
 package com.driver.services;
 
-import com.driver.exceptions.BlogNotFoundException;
-import com.driver.exceptions.ImageNotFoundException;
+
 import com.driver.models.*;
 import com.driver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +22,15 @@ public class ImageService {
         Image image=new Image();
         image.setDescription(description);
         image.setDimensions(dimensions);
-        Optional<Blog>optionalBlog=blogRepository2.findById(blogId);
-        if(optionalBlog.isEmpty())
-            throw new BlogNotFoundException("Blog with given blogId not found!!");
-        else {
-            Blog blog=optionalBlog.get();
+        Blog blog=blogRepository2.findById(blogId).get();
+
+
             imageRepository2.save(image);
             blog.getImageList().add(image);
             blogRepository2.save(blog);
             return image;
         }
-    }
+
 
     public void deleteImage(Integer id){
         blogRepository2.deleteById(id);
@@ -42,11 +39,8 @@ public class ImageService {
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
-            Optional<Image> imageOptional=imageRepository2.findById(id);
-            if(imageOptional.isEmpty())
-                throw new ImageNotFoundException("Image with given id not found!!");
-              else {
-                  Image image=imageOptional.get();
+        Image image=imageRepository2.findById(id).get();
+
                 String imagedimensions = image.getDimensions();
                 int[]givendimensionsarray=new int[2];
                 givendimensionsarray=helper(imagedimensions);
@@ -56,7 +50,7 @@ public class ImageService {
               return count;
             }
 
-    }
+
     public int[] helper(String dimensions)
     {
         int val=0;
